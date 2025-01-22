@@ -19,8 +19,6 @@ public class ContractStageController {
         return contractStageService.getAllContractStages();
     }
 
-
-
     @PostMapping
     public ContractStageDTO createContractStage(@RequestBody ContractStageDTO contractStageDTO) {
         return contractStageService.createContractStage(contractStageDTO);
