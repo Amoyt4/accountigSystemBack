@@ -1,6 +1,7 @@
 package ru.lukin.spring.nic_zadacha.service;
 
 import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,10 @@ import ru.lukin.spring.nic_zadacha.security.domain.Role;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AppUserSerice {
-    @Resource
-    private AppUserRepository appUserRepository;
+
+    private final AppUserRepository appUserRepository;
 
     @Resource
     PasswordEncoder passwordEncoder;

@@ -1,18 +1,26 @@
 package ru.lukin.spring.nic_zadacha.controller;
 
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import ru.lukin.spring.nic_zadacha.DTO.CounterpartyDTO;
 import ru.lukin.spring.nic_zadacha.service.CounterpartyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/counterparties")
+@AllArgsConstructor
 public class CounterpartyController {
 
-    @Autowired
-    private CounterpartyService counterpartyService;
+    private final CounterpartyService counterpartyService;
 
     @GetMapping
     public List<CounterpartyDTO> getAllCounterparties() {

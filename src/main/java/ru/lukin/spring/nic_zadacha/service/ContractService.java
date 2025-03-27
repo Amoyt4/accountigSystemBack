@@ -1,28 +1,27 @@
 package ru.lukin.spring.nic_zadacha.service;
 
+import lombok.AllArgsConstructor;
 import ru.lukin.spring.nic_zadacha.DTO.MyContractDTO;
 import ru.lukin.spring.nic_zadacha.model.ContractStage;
 import ru.lukin.spring.nic_zadacha.model.MyContract;
 import ru.lukin.spring.nic_zadacha.model.SubContract;
 import ru.lukin.spring.nic_zadacha.repository.MyContractRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MyContractService {
+@AllArgsConstructor
+public class ContractService {
 
-    @Autowired
-    private MyContractRepository myContractRepository;
+    private final MyContractRepository myContractRepository;
 
-    @Autowired
-    private ContractStageService contractStageService;
+    private final ContractStageService contractStageService;
 
-    @Autowired
-    private SubContractService subContractService;
+    private final SubContractService subContractService;
 
     public List<MyContractDTO> getAllMyContracts() {
         return myContractRepository.findAll().stream()
@@ -60,16 +59,14 @@ public class MyContractService {
         myContract.setPlannedEndDate(dto.getPlannedEndDate());
         myContract.setActualStartDate(dto.getActualStartDate());
         myContract.setActualEndDate(dto.getActualEndDate());
-        myContract.setAmount(dto.getAmount());
+        myContract.setAmount(BigDecimal.valueOf(dto.getAmount()));
 
-        // Преобразуем список id стадий в список сущностей ContractStage
         List<ContractStage> stages = dto.getStages().stream()
                 .map(stageId -> contractStageService.getContractStageById(stageId)
                         .orElseThrow(() -> new RuntimeException("Stage not found")))
                 .collect(Collectors.toList());
         myContract.setStages(stages);
 
-        // Преобразуем список id субконтрактов в список сущностей SubContract
         List<SubContract> subContracts = dto.getSubContracts().stream()
                 .map(subContractId -> subContractService.getSubContractById(subContractId)
                         .orElseThrow(() -> new RuntimeException("SubContract not found")))
@@ -90,12 +87,10 @@ public class MyContractService {
         dto.setActualEndDate(myContract.getActualEndDate());
         dto.setAmount(myContract.getAmount());
 
-        // Получаем только id стадий
         dto.setStages(myContract.getStages().stream()
                 .map(ContractStage::getId)
                 .collect(Collectors.toList()));
 
-        // Получаем только id субконтрактов
         dto.setSubContracts(myContract.getSubContracts().stream()
                 .map(SubContract::getId)
                 .collect(Collectors.toList()));

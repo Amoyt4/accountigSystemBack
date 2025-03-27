@@ -18,21 +18,26 @@ import java.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+
     @Resource
     private UserPrincipalService userPrincipalService;
 
     @Resource
     private JwtUtil jwtUtil;
 
+    String auth = "Authorization";
+    String header = "Bearer ";
+    int deleteNum = 7;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        final String authHeader = request.getHeader("Authorization");
+        final String authHeader = request.getHeader(auth);
 
         String jwtToken = null;
         String username = null;
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            jwtToken = authHeader.substring(7);
+        if (authHeader != null && authHeader.startsWith(header)) {
+            jwtToken = authHeader.substring(deleteNum);
             username = jwtUtil.getUsernameFromToken(jwtToken);
         }
 

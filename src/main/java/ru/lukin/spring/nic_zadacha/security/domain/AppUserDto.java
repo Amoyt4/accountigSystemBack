@@ -1,7 +1,10 @@
 package ru.lukin.spring.nic_zadacha.security.domain;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -9,9 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AppUserDto {
-    String username;
-    String password;
-    List<Role> roles;
+
+    private String username;
+    private String password;
+    private List<Role> roles;
 }

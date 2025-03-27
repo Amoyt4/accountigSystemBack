@@ -1,24 +1,26 @@
 package ru.lukin.spring.nic_zadacha.controller.excel;
 
-import org.apache.poi.ss.usermodel.*;
+import lombok.AllArgsConstructor;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.lukin.spring.nic_zadacha.model.MyContract;
 import ru.lukin.spring.nic_zadacha.model.SubContract;
 import ru.lukin.spring.nic_zadacha.repository.MyContractRepository;
 
 import java.io.ByteArrayOutputStream;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ExcelService {
 
-    @Autowired
-    private MyContractRepository myContractRepository;
+    private final MyContractRepository myContractRepository;
 
-    public byte[] createExcelFile(LocalDate startDate, LocalDate endDate) throws Exception {
+    public byte[] createExcelFile(Date startDate, Date endDate) throws Exception {
         List<MyContract> contracts = myContractRepository.findContractsByPlannedPeriod(startDate, endDate);
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Contracts");
@@ -38,7 +40,7 @@ public class ExcelService {
             row.createCell(1).setCellValue(contract.getContractType());
             row.createCell(2).setCellValue(contract.getPlannedStartDate().toString());
             row.createCell(3).setCellValue(contract.getPlannedEndDate().toString());
-            row.createCell(4).setCellValue(contract.getAmount());
+            row.createCell(4).setCellValue(String.valueOf(contract.getAmount()));
             row.createCell(5).setCellValue("Main");
 
             for (SubContract subContract : contract.getSubContracts()) {
@@ -47,7 +49,7 @@ public class ExcelService {
                 subRow.createCell(1).setCellValue(subContract.getContractType());
                 subRow.createCell(2).setCellValue(subContract.getPlannedStartDate().toString());
                 subRow.createCell(3).setCellValue(subContract.getPlannedEndDate().toString());
-                subRow.createCell(4).setCellValue(subContract.getAmount());
+                subRow.createCell(4).setCellValue(String.valueOf(subContract.getAmount()));
                 subRow.createCell(5).setCellValue(contract.getName());
             }
         }

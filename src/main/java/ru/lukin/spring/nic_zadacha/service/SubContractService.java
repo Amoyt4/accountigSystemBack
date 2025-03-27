@@ -1,9 +1,10 @@
 package ru.lukin.spring.nic_zadacha.service;
 
+import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import ru.lukin.spring.nic_zadacha.DTO.SubContractDTO;
 import ru.lukin.spring.nic_zadacha.model.SubContract;
 import ru.lukin.spring.nic_zadacha.repository.SubContractRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,13 +12,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class SubContractService {
 
-    @Autowired
-    private SubContractRepository subContractRepository;
 
-    @Autowired
-    private CounterpartyService counterpartyService;
+    private final SubContractRepository subContractRepository;
+
+    private final CounterpartyService counterpartyService;
 
     public List<SubContractDTO> getAllSubContracts() {
         return subContractRepository.findAll().stream()
@@ -61,9 +62,8 @@ public class SubContractService {
         subContract.setActualStartDate(dto.getActualStartDate());
         subContract.setActualEndDate(dto.getActualEndDate());
 
-        // Устанавливаем контрагента по ID
         subContract.setCounterparty(counterpartyService.getCounterpartyById(dto.getCounterpartyId())
-                .orElseThrow(() -> new RuntimeException("Counterparty not found")));
+                .orElseThrow(() -> new EntityNotFoundException("Counterparty not found")));
 
         return subContract;
     }
@@ -79,7 +79,6 @@ public class SubContractService {
         dto.setActualStartDate(subContract.getActualStartDate());
         dto.setActualEndDate(subContract.getActualEndDate());
 
-        // Получаем только id контрагента
         dto.setCounterpartyId(subContract.getCounterparty().getId());
 
         return dto;

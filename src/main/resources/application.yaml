@@ -13,3 +13,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 server:
   port: 8888
+jwt:
+  secret: "secretTestSecretTestSecretTestSecretTestSecretTest"
+  expiration-time: 866000000

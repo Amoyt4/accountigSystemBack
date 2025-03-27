@@ -1,6 +1,9 @@
 package ru.lukin.spring.nic_zadacha.controller.excel;
 
-import org.apache.poi.ss.usermodel.*;
+import lombok.AllArgsConstructor;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +15,10 @@ import java.io.ByteArrayOutputStream;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ContractExcelService {
 
-    @Autowired
-    private MyContractRepository myContractRepository;
+    private final MyContractRepository myContractRepository;
 
     public byte[] createExcelFile(String contractName) throws Exception {
         Optional<MyContract> contractOptional = myContractRepository.findByName(contractName);
@@ -49,11 +52,11 @@ public class ContractExcelService {
             row.createCell(2).setCellValue(stage.getPlannedEndDate().toString());
             row.createCell(3).setCellValue(stage.getActualStartDate() != null ? stage.getActualStartDate().toString() : "");
             row.createCell(4).setCellValue(stage.getActualEndDate() != null ? stage.getActualEndDate().toString() : "");
-            row.createCell(5).setCellValue(stage.getAmount());
-            row.createCell(6).setCellValue(stage.getMaterialCostsPlan());
-            row.createCell(7).setCellValue(stage.getMaterialCostsActual());
-            row.createCell(8).setCellValue(stage.getSalaryCostsPlan());
-            row.createCell(9).setCellValue(stage.getSalaryCostsActual());
+            row.createCell(5).setCellValue(String.valueOf(stage.getAmount()));
+            row.createCell(6).setCellValue(String.valueOf(stage.getMaterialCostsPlan()));
+            row.createCell(7).setCellValue(String.valueOf(stage.getMaterialCostsActual()));
+            row.createCell(8).setCellValue(String.valueOf(stage.getSalaryCostsPlan()));
+            row.createCell(9).setCellValue(String.valueOf(stage.getSalaryCostsActual()));
         }
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

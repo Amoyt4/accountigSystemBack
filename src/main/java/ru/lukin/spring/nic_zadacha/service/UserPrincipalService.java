@@ -1,6 +1,7 @@
 package ru.lukin.spring.nic_zadacha.service;
 
 import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -9,10 +10,10 @@ import ru.lukin.spring.nic_zadacha.security.domain.AppUser;
 import ru.lukin.spring.nic_zadacha.security.domain.UserPrincipal;
 
 @Service
+@AllArgsConstructor
 public class UserPrincipalService implements UserDetailsService {
 
-    @Resource
-    private AppUserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
 
     @Override
     public UserPrincipal loadUserByUsername(String username) throws UsernameNotFoundException {

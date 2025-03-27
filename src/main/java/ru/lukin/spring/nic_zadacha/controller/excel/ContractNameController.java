@@ -1,6 +1,6 @@
 package ru.lukin.spring.nic_zadacha.controller.excel;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/contract-excel")
+@AllArgsConstructor
 public class ContractNameController {
 
-    @Autowired
-    private ContractExcelService contractExcelService;
+    private final ContractExcelService contractExcelService;
 
     @PostMapping
     public ResponseEntity<byte[]> getContractStagesExcel(@RequestBody ContractNameRequest contractNameRequest) {

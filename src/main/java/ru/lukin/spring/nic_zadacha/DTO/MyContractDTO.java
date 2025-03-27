@@ -3,6 +3,7 @@ package ru.lukin.spring.nic_zadacha.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +18,9 @@ public class MyContractDTO {
     private LocalDate actualStartDate;
     private LocalDate actualEndDate;
     private Integer amount;
-    private List<Long> stages; // Список id стадий
-    private List<Long> subContracts; // Список id субконтрактов
+    private List<Long> stages;
+    private List<Long> subContracts;
+
+    public void setAmount(BigDecimal amount) {
+    }
 }

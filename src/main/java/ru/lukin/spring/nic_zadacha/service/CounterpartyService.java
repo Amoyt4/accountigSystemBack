@@ -1,5 +1,6 @@
 package ru.lukin.spring.nic_zadacha.service;
 
+import lombok.AllArgsConstructor;
 import ru.lukin.spring.nic_zadacha.DTO.CounterpartyDTO;
 import ru.lukin.spring.nic_zadacha.model.Counterparty;
 import ru.lukin.spring.nic_zadacha.repository.CounterpartyRepository;
@@ -11,10 +12,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class CounterpartyService {
 
-    @Autowired
-    private CounterpartyRepository counterpartyRepository;
+    private final CounterpartyRepository counterpartyRepository;
 
     public List<CounterpartyDTO> getAllCounterparties() {
         return counterpartyRepository.findAll().stream()

@@ -1,6 +1,14 @@
 package ru.lukin.spring.nic_zadacha.controller;
 
-import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import ru.lukin.spring.nic_zadacha.DTO.ContractStageDTO;
 import ru.lukin.spring.nic_zadacha.service.ContractStageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contract-stages")
+@AllArgsConstructor
 public class ContractStageController {
 
-    @Autowired
-    private ContractStageService contractStageService;
+    private final ContractStageService contractStageService;
 
     @GetMapping
     public List<ContractStageDTO> getAllContractStages() {

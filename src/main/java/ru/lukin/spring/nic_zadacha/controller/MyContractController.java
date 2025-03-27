@@ -1,42 +1,49 @@
 package ru.lukin.spring.nic_zadacha.controller;
 
+import lombok.AllArgsConstructor;
 import ru.lukin.spring.nic_zadacha.DTO.MyContractDTO;
-import ru.lukin.spring.nic_zadacha.service.MyContractService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import ru.lukin.spring.nic_zadacha.service.ContractService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/my-contracts")
+@AllArgsConstructor
 public class MyContractController {
 
-    @Autowired
-    private MyContractService myContractService;
+    private final ContractService contractService;
 
     @GetMapping
     public List<MyContractDTO> getAllMyContracts() {
-        return myContractService.getAllMyContracts();
+        return contractService.getAllMyContracts();
     }
 
     @GetMapping("/{id}")
     public MyContractDTO getMyContractById(@PathVariable Long id) {
-        return myContractService.getMyContractById(id).orElse(null);
+        return contractService.getMyContractById(id).orElse(null);
     }
 
     @PostMapping
     public MyContractDTO createMyContract(@RequestBody MyContractDTO myContractDTO) {
-        return myContractService.createMyContract(myContractDTO);
+        return contractService.createMyContract(myContractDTO);
     }
 
     @PutMapping("/{id}")
     public MyContractDTO updateMyContract(@PathVariable Long id, @RequestBody MyContractDTO myContractDTO) {
         myContractDTO.setId(id);
-        return myContractService.updateMyContract(myContractDTO);
+        return contractService.updateMyContract(myContractDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteMyContract(@PathVariable Long id) {
-        myContractService.deleteMyContract(id);
+        contractService.deleteMyContract(id);
     }
 }

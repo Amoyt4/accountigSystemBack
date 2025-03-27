@@ -1,8 +1,6 @@
 package ru.lukin.spring.nic_zadacha.security.util;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,10 +17,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
-    @Value("secretTestSecretTestSecretTestSecretTestSecretTest")
+
+    @Value("${jwt.secret}")
     private String secret;
 
-    @Value("866000000")
+    @Value("${jwt.expiration-time}")
     private Long expirationTime;
 
     private SecretKey getSecretKey() {
@@ -54,15 +53,14 @@ public class JwtUtil {
     }
 
     private Claims getClaimsFromToken(String token) {
-        try{
+        try {
             return Jwts.parserBuilder()
                     .setSigningKey(getSecretKey())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-        }
-        catch (Exception e){
-            throw new RuntimeException("НЕ УДАЛОСЬ ИЗВЛЕЧЬ ДАННЫЕ "+e);
+        } catch (Exception e) {
+            throw new JwtException("Не удалось извлечь из токена: " + e.getMessage(), e);
         }
     }
 

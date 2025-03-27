@@ -1,14 +1,16 @@
 package ru.lukin.spring.nic_zadacha.security.domain;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthDto {
-    String username;
-    String password;
+
+    private String username;
+    private String password;
 }
