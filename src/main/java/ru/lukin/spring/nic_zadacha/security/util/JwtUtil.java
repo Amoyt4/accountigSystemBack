@@ -62,7 +62,7 @@ public class JwtUtil {
                     .getBody();
         }
         catch (Exception e){
-            throw new RuntimeException("НЕ УДАЛОСЬ ИЗВЛЕЧЬ ДАННЫЕ"+e);
+            throw new RuntimeException("НЕ УДАЛОСЬ ИЗВЛЕЧЬ ДАННЫЕ "+e);
         }
     }
 

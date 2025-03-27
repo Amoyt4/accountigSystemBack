@@ -1,9 +1,9 @@
 package ru.lukin.spring.nic_zadacha.controller;
 
+import org.springframework.web.bind.annotation.*;
 import ru.lukin.spring.nic_zadacha.DTO.ContractStageDTO;
 import ru.lukin.spring.nic_zadacha.service.ContractStageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

@@ -1,9 +1,22 @@
 package ru.lukin.spring.nic_zadacha.repository;
 
-import ru.lukin.spring.nic_zadacha.model.MyContract;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import ru.lukin.spring.nic_zadacha.model.MyContract;
 
-@Repository
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 public interface MyContractRepository extends JpaRepository<MyContract, Long> {
+
+    @Query("SELECT c FROM MyContract c WHERE " +
+            "(c.plannedStartDate BETWEEN :startDate AND :endDate) OR " +
+            "(c.plannedEndDate BETWEEN :startDate AND :endDate)")
+    List<MyContract> findContractsByPlannedPeriod(
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate
+    );
+    Optional<MyContract> findByName(String name);
 }

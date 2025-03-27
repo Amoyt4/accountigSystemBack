@@ -1,6 +1,5 @@
 package ru.lukin.spring.nic_zadacha.security.domain;
 
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,7 +13,5 @@ import java.util.List;
 public class AppUserDto {
     String username;
     String password;
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    List<Role> role;
+    List<Role> roles;
 }

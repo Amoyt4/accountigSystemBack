@@ -27,7 +27,7 @@ public class AppUserSerice {
         AppUserDto appUserDto = AppUserDto.builder()
                 .username(authDto.getUsername())
                 .password(authDto.getPassword())
-                .role(List.of(Role.USER))
+                .roles(List.of(Role.USER))
                 .build();
 
         appUserRepository.save(new ModelMapper().map(appUserDto, AppUser.class));

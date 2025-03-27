@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-    @RequestMapping("/counterparties")
+@RequestMapping("/counterparties")
 public class CounterpartyController {
 
     @Autowired
