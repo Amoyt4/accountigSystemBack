@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/data-excel")
@@ -22,10 +22,10 @@ public class DataExcelController {
     private final ExcelService excelService;
 
     @PostMapping
-    public ResponseEntity<byte[]> dataExcel(@RequestBody DateRangeRequest dateRangeRequest) {
+    public ResponseEntity<byte[]> dataExcel(@RequestBody DateRangeRequest dateRangeRequest){
         try {
-            Date startDate = dateRangeRequest.getDateStart();
-            Date endDate = dateRangeRequest.getDateEnd();
+            LocalDate startDate = dateRangeRequest.getDateStart();
+            LocalDate endDate = dateRangeRequest.getDateEnd();
 
             byte[] excelFile = excelService.createExcelFile(startDate, endDate);
 
@@ -39,7 +39,6 @@ public class DataExcelController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Ошибка при создании файла".getBytes());
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

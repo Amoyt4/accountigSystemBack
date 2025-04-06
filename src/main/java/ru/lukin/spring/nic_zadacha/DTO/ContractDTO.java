@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MyContractDTO {
+public class ContractDTO {
     private Long id;
     private String name;
     private String contractType;
@@ -17,10 +17,7 @@ public class MyContractDTO {
     private LocalDate plannedEndDate;
     private LocalDate actualStartDate;
     private LocalDate actualEndDate;
-    private Integer amount;
+    private BigDecimal amount;
     private List<Long> stages;
     private List<Long> subContracts;
-
-    public void setAmount(BigDecimal amount) {
-    }
 }

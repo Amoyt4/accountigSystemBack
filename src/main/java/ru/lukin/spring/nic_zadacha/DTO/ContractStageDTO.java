@@ -15,24 +15,9 @@ public class ContractStageDTO {
     private LocalDate plannedEndDate;
     private LocalDate actualStartDate;
     private LocalDate actualEndDate;
-    private Integer amount;
-    private Integer materialCostsPlan;
-    private Integer materialCostsActual;
-    private Integer salaryCostsPlan;
-    private Integer salaryCostsActual;
-
-    public void setAmount(BigDecimal amount) {
-    }
-
-    public void setMaterialCostsPlan(BigDecimal materialCostsPlan) {
-    }
-
-    public void setMaterialCostsActual(BigDecimal materialCostsActual) {
-    }
-
-    public void setSalaryCostsActual(BigDecimal salaryCostsActual) {
-    }
-
-    public void setSalaryCostsPlan(BigDecimal salaryCostsPlan) {
-    }
+    private BigDecimal amount;
+    private BigDecimal materialCostsPlan;
+    private BigDecimal materialCostsActual;
+    private BigDecimal salaryCostsPlan;
+    private BigDecimal salaryCostsActual;
 }

@@ -57,11 +57,11 @@ public class ContractStageService {
         contractStage.setPlannedEndDate(dto.getPlannedEndDate());
         contractStage.setActualStartDate(dto.getActualStartDate());
         contractStage.setActualEndDate(dto.getActualEndDate());
-        contractStage.setAmount(BigDecimal.valueOf(dto.getAmount()));
-        contractStage.setMaterialCostsPlan(BigDecimal.valueOf(dto.getMaterialCostsPlan()));
-        contractStage.setMaterialCostsActual(BigDecimal.valueOf(dto.getMaterialCostsActual()));
-        contractStage.setSalaryCostsPlan(BigDecimal.valueOf(dto.getSalaryCostsPlan()));
-        contractStage.setSalaryCostsActual(BigDecimal.valueOf(dto.getSalaryCostsActual()));
+        contractStage.setAmount(dto.getAmount());
+        contractStage.setMaterialCostsPlan(dto.getMaterialCostsPlan());
+        contractStage.setMaterialCostsActual(dto.getMaterialCostsActual());
+        contractStage.setSalaryCostsPlan(dto.getSalaryCostsPlan());
+        contractStage.setSalaryCostsActual(dto.getSalaryCostsActual());
 
         return contractStage;
     }

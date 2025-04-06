@@ -21,7 +21,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "contract")
-public class MyContract {
+public class Contract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

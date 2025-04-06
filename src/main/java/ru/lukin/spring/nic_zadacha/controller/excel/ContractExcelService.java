@@ -5,11 +5,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.lukin.spring.nic_zadacha.model.ContractStage;
-import ru.lukin.spring.nic_zadacha.model.MyContract;
-import ru.lukin.spring.nic_zadacha.repository.MyContractRepository;
+import ru.lukin.spring.nic_zadacha.model.Contract;
+import ru.lukin.spring.nic_zadacha.repository.ContractRepository;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Optional;
@@ -18,16 +17,16 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ContractExcelService {
 
-    private final MyContractRepository myContractRepository;
+    private final ContractRepository contractRepository;
 
     public byte[] createExcelFile(String contractName) throws Exception {
-        Optional<MyContract> contractOptional = myContractRepository.findByName(contractName);
+        Optional<Contract> contractOptional = contractRepository.findByName(contractName);
 
         if (contractOptional.isEmpty()) {
             throw new IllegalArgumentException("Contract not found");
         }
 
-        MyContract contract = contractOptional.get();
+        Contract contract = contractOptional.get();
 
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Contract Stages");
